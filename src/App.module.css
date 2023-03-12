@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+}
+a{
+    color: inherit;
+    text-decoration: inherit;
+}
+body{
+    font-family: "Poppins", sans-serif;
+}
+.app{
+    background: url("./assets/asset 1.png");
+   background-size: cover;
+    height: 103vh;
+    border: 8px solid gray;
+    margin: 5px;
+    padding: 5px;
+}
