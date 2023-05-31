@@ -16,8 +16,9 @@ body{
 .app{
     background: url("./assets/asset 1.png");
    background-size: cover;
-    height: 103vh;
+    min-height: 100vh;
     border: 8px solid gray;
-    margin: 5px;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
 }

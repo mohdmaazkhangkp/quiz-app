@@ -56,6 +56,12 @@ const QuizPage = ({
     
   };
 
+  function decodeHTMLEntities(text) {
+    const element = document.createElement('textarea');
+    element.innerHTML = text;
+    return element.value;
+  }
+
   return (
     <>
       {loading ? (
@@ -70,7 +76,7 @@ const QuizPage = ({
           <h2>Question {pageNumber} :</h2>
           <div className={classes.quizContainer}>
             <div className={classes.question}>
-              {questions[pageNumber - 1].question}
+                {decodeHTMLEntities(questions[pageNumber - 1].question)}
             </div>
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <div className={classes.options}>
@@ -84,7 +90,7 @@ const QuizPage = ({
                     }`}
                     disabled={selected}
                   >
-                    {option}
+                    {decodeHTMLEntities(option)}
                   </button>
                 ))}
             </div>

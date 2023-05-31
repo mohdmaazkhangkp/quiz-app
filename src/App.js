@@ -61,8 +61,9 @@ function App() {
           />
           <Route path="/result" element={<ResultPage score={score} />} />
         </Routes>
+        <Footer />
       </div>
-      <Footer />
+      
     </>
   );
 }
