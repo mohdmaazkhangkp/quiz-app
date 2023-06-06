@@ -1,4 +1,5 @@
 import React, {  useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import {useNavigate} from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
 import classes from './QuizPage.module.css';
@@ -14,15 +15,14 @@ const QuizPage = ({
   const [selected, setSelected] = useState();
   const [error, setError] = useState();
    const navigate = useNavigate();
-     const [correctOptions, setCorrectOptions] = useState();
-     const [allOptions, setAllOptions] = useState();
+     const [correctOptions, setCorrectOptions] = useState([]);
+     const [allOptions, setAllOptions] = useState([]);
 
    useEffect(() => {
-     setCorrectOptions(questions.map((q) => q.correct_answer));
-     setCorrectOptions(questions.map((q) => q.correct_answer));
+     setCorrectOptions(questions?.map((q) => q.correct_answer));
      setAllOptions(
        questions
-         .map((q) => [q.correct_answer, ...q.incorrect_answers])
+         ?.map((q) => [q.correct_answer, ...q.incorrect_answers])
          .map((option) => option.sort(() => Math.random() - 0.5))
      );
    }, [questions]);
@@ -65,23 +65,34 @@ const QuizPage = ({
   return (
     <>
       {loading ? (
-        <div>loading...</div>
+        
+        <TailSpin
+          height="150"
+          width="150"
+          color="gray"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+            wrapperClass={classes.spinner}
+          visible={true}
+        />
+       
       ) : (
         <div className={classes.container}>
           <h3>Welcome, {name}</h3>
           <div className={classes.catScoreContainer}>
-            <div className={classes.category}>{questions[0].category}</div>
+            <div className={classes.category}>{questions[0]?.category}</div>
             <div className={classes.score}>Score: {score}</div>
           </div>
           <h2>Question {pageNumber} :</h2>
           <div className={classes.quizContainer}>
             <div className={classes.question}>
-                {decodeHTMLEntities(questions[pageNumber - 1].question)}
+                {decodeHTMLEntities(questions[pageNumber - 1]?.question)}
             </div>
             {error && <ErrorMessage>{error}</ErrorMessage>}
             <div className={classes.options}>
               {allOptions &&
-                allOptions[pageNumber - 1].map((option) => (
+                allOptions[pageNumber - 1]?.map((option) => (
                   <button
                     onClick={() => handleCheck(option)}
                     key={option}

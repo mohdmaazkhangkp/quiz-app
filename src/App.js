@@ -10,25 +10,27 @@ import axios from 'axios';
 import Categories from "./data/Categories";
 
 function App() {
-  const[name, setName] = useState();
+  const[name, setName] = useState("");
   const [score, setScore] = useState(0);
-  const [questions, setQuestions] = useState();
+  const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState();
 
  const navigate = useNavigate();
 
 
   const fetchQuestions = async(category, difficulty) => {
-    const categoryValue = Categories.find((c)=>c.category==category).value;
     setLoading(true);
+    navigate("/quiz");
+    const categoryValue = Categories.find((c)=>c.category==category).value;
+    
    const { data } = await axios.get(
      `https://opentdb.com/api.php?amount=10&category=${categoryValue}&difficulty=${difficulty}&type=multiple`
    );
-    setLoading(false);
+    
    setQuestions(data.results);
-   
-  
-   navigate("/quiz");
+    setLoading(false);
+    
+
   };
 
   return (
